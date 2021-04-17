@@ -1,0 +1,33 @@
+apiVersion: "apiextensions.k8s.io/v1beta1"
+kind: "CustomResourceDefinition"
+metadata:
+  name: "kafkatopics.test.prakash.com"
+spec:
+  group: "test.prakash.com"
+  version: "v1alpha1"
+  scope: "Namespaced"
+  names:
+    plural: kafkatopics
+    singular: kafkatopic
+    kind: KafkaTopic
+    shortNames:
+      - kt
+  validation:
+    openAPIV3Schema:
+      required: [ "spec" ]
+      properties:
+        spec:
+          required: [ "name","partition","replication","cluster" ]
+          properties:
+            name:
+              type: "string"
+              minimum: 1
+            partition:
+              type: "string"
+              minimum: 1
+            replication:
+              type: "string"
+              minimum: 1
+            cluster:
+              type: "string"
+              minimum: 1
